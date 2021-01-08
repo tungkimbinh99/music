@@ -6,8 +6,10 @@ public class Song {
     private String song_description;
     private String song_url;
     private String song_thumb;
-    private String song_author;
+//    private String song_author;
     private String song_singer;
+    private int album_id;
+    private int artist_id;
 
     public Song() {
     }
@@ -52,19 +54,27 @@ public class Song {
         this.song_thumb = song_thumb;
     }
 
-    public String getSong_author() {
-        return song_author;
-    }
-
-    public void setSong_author(String song_author) {
-        this.song_author = song_author;
-    }
-
     public String getSong_singer() {
         return song_singer;
     }
 
     public void setSong_singer(String song_singer) {
         this.song_singer = song_singer;
+    }
+
+    public int getAlbum_id() {
+        return album_id;
+    }
+
+    public void setAlbum_id(int album_id) {
+        this.album_id = album_id;
+    }
+
+    public int getArtist_id() {
+        return artist_id;
+    }
+
+    public void setArtist_id(int artist_id) {
+        this.artist_id = artist_id;
     }
 }

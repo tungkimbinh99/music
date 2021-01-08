@@ -1,5 +1,7 @@
 package category;
 
+import album.Album;
+
 import java.util.ArrayList;
 
 public class Category {

@@ -1,9 +1,7 @@
 package user;
 
 import model.Respone;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -17,12 +15,12 @@ public class UserController {
 //        Login login= new Login();
 //        BeanUtils.copyProperties(loginParams,login);
 //        System.out.println("username "+ login.getUsername());
-        User user = new UserDB().getUser(loginParams.getUsername(), loginParams.getPassword());
+        User user = new UserDAO().getUser(loginParams.getUsername(), loginParams.getPassword());
         if (user != null) {
             respone.setData(user);
         } else {
-            respone.setMesseges("Tài khoản không tồn tại");
-            respone.setData(user);
+            respone.setMesseges("Email hoặc password không đúng");
+//            respone.setData(user);
         }
         return respone;
     }
@@ -35,13 +33,20 @@ public class UserController {
 //        Login login= new Login();
 //        BeanUtils.copyProperties(loginParams,login);
 //        System.out.println("username "+ login.getUsername());
-        User user = new UserDB().creatUser(regitsterParams);
+        User user = new UserDAO().creatUser(regitsterParams);
         if (user != null) {
             respone.setMesseges("Đăng kí thành công");
             respone.setData(user);
         } else {
             respone.setMesseges("Tài khoản đã tồn tại");
         }
+        return respone;
+    }
+    @GetMapping("/api/search")
+    public Respone getSearch(@RequestParam(value = "key",defaultValue = "") String key){
+        Respone respone = new Respone();
+        respone.setStatus(true);
+        respone.setData(new UserDAO().search(key));
         return respone;
     }
 }

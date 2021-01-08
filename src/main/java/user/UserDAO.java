@@ -1,13 +1,16 @@
 package user;
 
 import Base.DAO;
+import album.AlbumDAO;
+import artist.ArtistDAO;
+import song.SongDAO;
 import utils.Convert;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDB extends DAO implements IUserDAO {
+public class UserDAO extends DAO implements IUserDAO {
     @Override
     public User getUser(String usrname,String password) {
         String sql = "SELECT * FROM tblUsers WHERE username = ? AND password = ?";
@@ -46,5 +49,14 @@ public class UserDB extends DAO implements IUserDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Search search(String key) {
+        Search search = new Search();
+        search.setSongs(new SongDAO().search(key));
+        search.setAlbums(new AlbumDAO().search(key));
+        search.setArtists(new ArtistDAO().search(key));
+        return search;
     }
 }
